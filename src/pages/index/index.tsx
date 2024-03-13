@@ -1,4 +1,4 @@
-import { useDidShow, getCurrentInstance, getTabBar } from '@tarojs/taro';
+// import { useDidShow, getCurrentInstance, getTabBar } from '@tarojs/taro';
 import Banner from './components/Banner';
 import UserCard from './components/UserCard';
 import ServiceContent from './components/ServiceContent';
@@ -7,11 +7,11 @@ import './index.less';
 
 export default function Index() {
 
-  useDidShow(() => {
-    const pageObj = getCurrentInstance().page;
-    const tabbar = getTabBar(pageObj);
-    console.log(pageObj, tabbar, '这里是学习，暂留')
-  });
+  // useDidShow(() => {
+  //   const pageObj = getCurrentInstance().page;
+  //   const tabbar = getTabBar(pageObj);
+  //   console.log(pageObj, tabbar, '这里是学习，暂留')
+  // });
 
   // console.log(process);
 

@@ -5,12 +5,12 @@ import "./index.less";
 
 const index = () => {
 
-  const { list, id: selecteId } = useTabbatContext();
+  const { tabBars, selectedId } = useTabbatContext();
 
   return (
     <div className="tabbar">
-      {list.map((item) => (
-        <Bar key={item.id} {...item} selecteId={selecteId} />
+      {tabBars.map((item) => (
+        <Bar key={item.id} {...item} selectedId={selectedId} />
       ))}
     </div>
   );

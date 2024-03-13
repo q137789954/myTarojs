@@ -1,75 +1,67 @@
-import { useState, useCallback, createContext } from "react";
+import React, {
+  createContext,
+  useReducer,
+} from "react";
+import { useDidShow, Current } from '@tarojs/taro';
+import { ActionType, TabBarsType, StateTyPe } from './type'
 
-export interface BarInterface {
-  id: number;
-  icon: string;
-  text: string;
-  middle?: boolean;
-  url: string;
+
+const initialState: StateTyPe = {
+  tabBars: [] as TabBarsType,
+  selectedId: -1,
+  dispatch: (() => {}) as React.Dispatch<ActionType>
 }
 
-interface ContextValue {
-  list: Array<BarInterface>,
-  id: number,
-  recomposeTabbarId: Function
-}
+export const Context = createContext(initialState);
 
-const list: Array<BarInterface> = [
-  {
-    id: 0,
-    icon: "icon-xingji",
-    text: "首页",
-    url: "/pages/index/index",
-  },
-  {
-    id: 1,
-    icon: "icon-zhaomu",
-    text: "俱乐部",
-    url: "/pages/club/index",
-  },
-  {
-    id: 2,
-    icon: "icon-saoma",
-    text: "扫码",
-    middle: true,
-    url: "/pages/qrcode/index",
-  },
-  {
-    id: 3,
-    icon: "icon-dangan",
-    text: "订单",
-    url: "/pages/order/index",
-  },
-  {
-    id: 4,
-    icon: "icon-wode",
-    text: "我的",
-    url: "/pages/my/index",
-  },
-];
+const reduce = (state: StateTyPe, action: ActionType) => {
 
-export const Context = createContext<ContextValue>({
-  list,
-  id: 0,
-  recomposeTabbarId: () => {}
-});
+  const { type, payload } = action;
+
+  switch (type) {
+    case "updateTabBars":
+      const { tabBars } = payload;
+      const tabBarsNew = tabBars.map((item, index) => {
+        const { pagePath } = item;
+        return {
+          ...item,
+          id: index,
+          pagePath: `/${pagePath}`,
+        };
+      });
+      return { tabBars: tabBarsNew,  selectedId: tabBarsNew[0].id};
+
+    case "updateSelected":
+
+        const { tabBars: stateTabBars } = state
+      const { selectedUrl } = payload;
+      const selects = stateTabBars.filter((item) => item.pagePath === selectedUrl);
+
+      return {...state, selectedId: selects[0].id}
+    default:
+      throw new Error();
+  }
+};
 
 const TaberProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reduce, initialState);
+  const { selectedId, tabBars } = state;
 
-  const [id, setId] = useState(0);
-  const recomposeTabbarId = useCallback((url:string) => {
-
-    const selects = list.filter((item) => item.url === url);
-    selects.length && setId(selects[0].id);
-
-  }, [setId]);
+  useDidShow(() => {
+    dispatch({
+      type: 'updateTabBars',
+      payload: {
+        tabBars: Current.app.config.tabBar.list
+      }
+    })
+  })
 
   return (
     <Context.Provider
       value={{
-        id,
-        list,
-        recomposeTabbarId
+        selectedId,
+        tabBars,
+        dispatch: dispatch
       }}
     >
       {children}

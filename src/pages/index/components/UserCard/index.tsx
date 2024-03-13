@@ -1,12 +1,12 @@
 import { Image } from "@tarojs/components";
-import { TabbarLink } from '@/components/index';
+import { Link } from '@/components/index';
 import "./index.less";
 import avatarImg from "./assets/avatar.webp";
 import starImg from "./assets/star.png";
 
 const UserCard = () => {
   return (
-    <TabbarLink href="/pages/club/index">
+    <Link url="/pages/club/index">
       <div className="userCard">
         <div className="avatar">
           <Image className="avatarImg" mode="aspectFit" src={avatarImg} />
@@ -26,7 +26,7 @@ const UserCard = () => {
           <div className="couponText">5张好礼券</div>
         </div>
       </div>
-    </TabbarLink>
+    </Link>
   );
 };
 

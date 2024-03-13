@@ -1,3 +1,5 @@
+// import img1 from './assets/tabbar/1_on.png'
+
 export default defineAppConfig({
   pages: [
     'pages/index/index',
@@ -24,23 +26,35 @@ export default defineAppConfig({
     list:[
       {
         pagePath: 'pages/index/index',
-        text:"首页"
+        text:"首页",
+        iconPath: 'assets/tabbar/1.png',
+        // iconPath: img1,
+        selectedIconPath: 'assets/tabbar/1_on.png',
       },
       {
         pagePath: 'pages/club/index',
-        text: '俱乐部'
+        text: '俱乐部',
+        iconPath: "assets/tabbar/2.png",
+        selectedIconPath: 'assets/tabbar/2_on.png',
       },
       {
+        text: '扫码',
         pagePath: 'pages/qrcode/index',
-        text: '扫码'
+        iconPath: "assets/tabbar/3.png",
+        selectedIconPath: 'assets/tabbar/3.png',
+        middle: true,
       },
       {
         pagePath: 'pages/order/index',
-        text: '订单'
+        text: '订单',
+        iconPath: "assets/tabbar/4.png",
+        selectedIconPath: 'assets/tabbar/4_on.png',
       },
       {
         pagePath: 'pages/my/index',
-        text: '我的'
+        text: '我的',
+        iconPath: "assets/tabbar/5.png",
+        selectedIconPath: 'assets/tabbar/5_on.png',
       },
     ]
   },

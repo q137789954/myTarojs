@@ -1,21 +1,19 @@
 import { Link } from "@/components";
-import { BarInterface } from '@/models/tabbar';
+import { Image } from "@tarojs/components";
 import "./assets/iconfont.css";
 import "./index.less";
 
+type BarPropsType = Taro.TabBarItem & {middle?: boolean, selectedId?: number, id: number};
 
-
-type BarProps = BarInterface & {selecteId: number}
-
-const Bar = (props: BarProps) => {
-  const { icon, text, id, middle, url, selecteId } = props;
+const Bar = (props: BarPropsType) => {
+  const { iconPath, selectedIconPath, text, id, middle, pagePath, selectedId } = props;
 
   if (middle) {
     return (
-      <Link className="middleBar" url={url}>
+      <Link className="middleBar" url={pagePath}>
         <div className="iconBox">
           <div className="iconBg">
-            <span className={`icon iconfont ${icon}`}></span>
+          <Image className="icon" src={`/${iconPath}`} mode='aspectFill' />
           </div>
         </div>
       </Link>
@@ -23,8 +21,11 @@ const Bar = (props: BarProps) => {
   }
 
   return (
-    <Link className={`bar ${selecteId === id ? "on" : ""}`} url={url}>
-      <span className={`icon iconfont ${icon}`} />
+    <Link className={`bar ${selectedId === id ? "on" : ""}`} url={pagePath}>
+      {/* <span className={`icon iconfont ${icon}`} /> */}
+      {/* <Image className="icon" src={selectedId === id ?  `/${selectedIconPath}` : `/${iconPath}`} mode='aspectFill' /> */}
+      <Image className={`iconSelectd`} src={`/${selectedIconPath}`} mode='aspectFill' />
+      <Image className={`icon`} src={`/${iconPath}`} mode='aspectFill' />
       <div className="text">{text}</div>
     </Link>
   );
