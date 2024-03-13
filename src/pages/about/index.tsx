@@ -1,0 +1,1 @@
+export default () => <div>跳转测试页面</div>

@@ -1,0 +1,60 @@
+.bar {
+    height: 100px;
+    width: 20%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+
+    &.on {
+        color: #666;
+    }
+
+    .icon {
+        font-size: 48px;
+    }
+
+    .text {
+        font-size: 24px;
+        margin-top: 12px;
+    }
+}
+
+.middleBar {
+    height: 100px;
+    width: 20%;
+    position: relative;
+    padding: 20px;
+
+    .iconBox {
+        width: 140px;
+        height: 140px;
+        background: #fff;
+        border-radius: 100px;
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        z-index: 3;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .iconBg {
+            width: 100px;
+            height: 100px;
+            border-radius: 60px;
+            background: rgb(0, 100, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon {
+            font-size: 60px;
+            color: #fff;
+        }
+    }
+}

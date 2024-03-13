@@ -1,0 +1,18 @@
+.serviceContent {
+    display: flex;
+    margin-top: 24px;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+        content: '';
+        width: 2px;
+        height: 210px;
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        margin-left: -1px;
+        background-color: rgba(0, 0, 0, .1);
+    }
+}

@@ -1,0 +1,72 @@
+.userCard {
+    height: 100px;
+    display: flex;
+    padding: 16px;
+    border-radius: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+
+    .avatar {
+        width: 68px;
+        height: 68px;
+        border-radius: 34px;
+        overflow: hidden;
+        flex-shrink: 0;
+        margin-right: 24px;
+
+        .avatarImg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .star {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .top {
+            height: auto;
+            line-height: 40px;
+            .count {
+                font-size: 26px;
+                font-weight: 600;
+            }
+            .startImg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .bottom {
+            line-height: 20px;
+            .startText {
+                font-size: 18px;
+            }
+
+            .smallStar {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+
+    .coupon {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+        .couponText {
+            height: 58px;
+            line-height: 58px;
+            padding: 0 16px;
+            border-radius: 29px;
+            background: rgb(156, 135, 2);
+            font-size: 24px;
+            color: #eee;
+        }
+    }
+}
