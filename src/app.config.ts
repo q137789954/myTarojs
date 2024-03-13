@@ -5,7 +5,9 @@ export default defineAppConfig({
     'pages/qrcode/index',
     'pages/order/index',
     'pages/my/index',
-    'pages/about/index', // 跳转测试页面
+    'pages/test1/index', // 跳转测试页面
+    'pages/test2/index', // 跳转测试页面
+    'pages/test3/index', // 跳转测试页面
   ],
   entryPagePath: 'pages/index/index',
   window: {

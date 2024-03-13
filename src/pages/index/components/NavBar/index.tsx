@@ -1,4 +1,5 @@
 import { Image } from "@tarojs/components";
+import { Link } from '@/components';
 import img2 from "./assets/2.webp";
 import "./index.less";
 
@@ -10,8 +11,8 @@ const list = [
   },
   {
     icon: img2,
-    title: "送心意",
-    text: "节日电子礼品卡",
+    title: "请点击",
+    text: "点击测试Link组件",
   },
   {
     icon: img2,
@@ -33,11 +34,11 @@ const NavBar = () => {
 
         // 此处有Bug，a标签无法跳转，tarojs的Navigator组件可以
         return (
-          <a className="nav" href="/pages/about/index" target="_self">
+          <Link className="nav" url="/pages/test1/index">
             <Image className="img" src={icon} mode="aspectFill" />
             <div className="title">{title}</div>
             <div className="text">{text}</div>
-          </a>
+          </Link>
         );
       })}
     </div>

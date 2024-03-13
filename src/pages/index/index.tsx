@@ -1,4 +1,4 @@
-import { useLoad, useDidShow, getCurrentInstance, getTabBar } from '@tarojs/taro';
+import { useDidShow, getCurrentInstance, getTabBar } from '@tarojs/taro';
 import Banner from './components/Banner';
 import UserCard from './components/UserCard';
 import ServiceContent from './components/ServiceContent';
@@ -7,12 +7,7 @@ import './index.less';
 
 export default function Index() {
 
-  useLoad(() => {
-    console.log('Page loaded.')
-  })
-
   useDidShow(() => {
-    console.log(10000000)
     const pageObj = getCurrentInstance().page;
     const tabbar = getTabBar(pageObj);
     console.log(pageObj, tabbar, '这里是学习，暂留')

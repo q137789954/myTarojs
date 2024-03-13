@@ -1,5 +1,4 @@
-import { useState, useCallback, createContext, useEffect } from "react";
-import { switchTab } from "@tarojs/taro";
+import { useState, useCallback, createContext } from "react";
 
 export interface BarInterface {
   id: number;
@@ -12,7 +11,7 @@ export interface BarInterface {
 interface ContextValue {
   list: Array<BarInterface>,
   id: number,
-  to: (url:string) => void
+  recomposeTabbarId: Function
 }
 
 const list: Array<BarInterface> = [
@@ -52,25 +51,17 @@ const list: Array<BarInterface> = [
 export const Context = createContext<ContextValue>({
   list,
   id: 0,
-  to: () => {},
+  recomposeTabbarId: () => {}
 });
 
 const TaberProvider = ({ children }) => {
-  const [id, setId] = useState(0);
 
-  const to = useCallback((url:string) => {
+  const [id, setId] = useState(0);
+  const recomposeTabbarId = useCallback((url:string) => {
 
     const selects = list.filter((item) => item.url === url);
-    if (selects.length) {
-      switchTab({
-        url: url,
-        success() {
-          setId(selects[0].id);
-        },
-      });
-    } else {
-      setId(-1);
-    }
+    selects.length && setId(selects[0].id);
+
   }, [setId]);
 
   return (
@@ -78,7 +69,7 @@ const TaberProvider = ({ children }) => {
       value={{
         id,
         list,
-        to,
+        recomposeTabbarId
       }}
     >
       {children}

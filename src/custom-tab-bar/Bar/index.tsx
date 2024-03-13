@@ -1,4 +1,4 @@
-import { TabbarLink } from "@/components";
+import { Link } from "@/components";
 import { BarInterface } from '@/models/tabbar';
 import "./assets/iconfont.css";
 import "./index.less";
@@ -12,21 +12,21 @@ const Bar = (props: BarProps) => {
 
   if (middle) {
     return (
-      <TabbarLink className="middleBar" href={url}>
+      <Link className="middleBar" url={url}>
         <div className="iconBox">
           <div className="iconBg">
             <span className={`icon iconfont ${icon}`}></span>
           </div>
         </div>
-      </TabbarLink>
+      </Link>
     );
   }
 
   return (
-    <TabbarLink className={`bar ${selecteId === id ? "on" : ""}`} href={url}>
+    <Link className={`bar ${selecteId === id ? "on" : ""}`} url={url}>
       <span className={`icon iconfont ${icon}`} />
       <div className="text">{text}</div>
-    </TabbarLink>
+    </Link>
   );
 };
 
