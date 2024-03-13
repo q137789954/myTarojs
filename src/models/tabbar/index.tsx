@@ -51,6 +51,7 @@ const TaberProvider = ({ children }) => {
     dispatch({
       type: 'updateTabBars',
       payload: {
+        // @ts-ignore
         tabBars: Current.app.config.tabBar.list
       }
     })

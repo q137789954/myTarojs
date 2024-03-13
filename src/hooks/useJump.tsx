@@ -24,7 +24,7 @@ const useJump = () => {
     if (typeof props === "string") {
       // 只传入地址
 
-      const result = tabBars.some((item) => item.url === props);
+      const result = tabBars.some((item) => item.pagePath === props);
       if (result) {
         // 判断是否tarbar类型跳转
         dispatch({
