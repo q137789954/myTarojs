@@ -8,6 +8,13 @@ import {
 } from "@tarojs/taro";
 import useTabbatContext from "@/models/tabbar/useTabbatContext";
 
+/**
+ * @param
+ * 参数为 string，默认 navigateTo｜switchTab  跳转类型
+ * 参数为 number， 默认 navigateBack 类型跳转
+ * 参数为 object，navigateTo｜switchTab｜navigateBack 类型跳转 type字段为可选， 余下字段同tarojs路由跳转API传参
+ */
+
 type ToProps =
   | string
   | number
@@ -19,14 +26,13 @@ type ToProps =
 
 const useJump = () => {
   const { dispatch, tabBars } = useTabbatContext();
-
   const jump = useCallback((props: ToProps) => {
+    // 参数为string 为switchTab｜navigateTo 跳转类型
     if (typeof props === "string") {
-      // 只传入地址
-
+      // 判断是否 switchTab 跳转类型
       const result = tabBars.some((item) => item.pagePath === props);
       if (result) {
-        // 判断是否tarbar类型跳转
+        // 跳转tarbar页面前，改变tarbar选中项
         dispatch({
           type: "updateSelected",
           payload: {
@@ -37,32 +43,22 @@ const useJump = () => {
           url: props,
         });
       } else {
-        // 普通跳转
+        // navigateTo 跳转类型
         navigateTo({ url: props });
       }
       return "";
     }
 
-    // 判断是否返回类型跳转
+    // 判断是否是返回类型跳转
     if (typeof props === "number") {
       navigateBack({ delta: props });
       return "";
     }
 
-    // props 为对象，解析对方，判断跳转类型
 
-    const navigateApi = {
-      navigateTo: navigateTo,
-      navigateBack: navigateBack,
-      switchTab: switchTab,
-      reLaunch: reLaunch,
-      redirectTo: redirectTo,
-    };
+    let { type: realType, ...option } = props;
 
-    const { type, ...option } = props;
-
-    let realType = type;
-
+    // switchTab｜ navigateTo｜navigateBack type字段选填，此处补全跳转类型
     if (!realType) {
       // delta
       if ((props as Taro.navigateBack.Option).delta) {
@@ -78,6 +74,7 @@ const useJump = () => {
       }
     }
 
+    // 跳转tabbar页面前，修改tabbar选中状态
     if (realType === "switchTab") {
       dispatch({
         type: "updateSelected",
@@ -86,6 +83,14 @@ const useJump = () => {
         },
       });
     }
+
+    const navigateApi = {
+      navigateTo: navigateTo,
+      navigateBack: navigateBack,
+      switchTab: switchTab,
+      reLaunch: reLaunch,
+      redirectTo: redirectTo,
+    };
 
     navigateApi[realType](option);
   }, []);

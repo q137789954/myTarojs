@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export type TabBarsType = Array<Taro.TabBarItem & {middle?: boolean, id: number}>
+export type TabBarsType = Array<Taro.TabBarItem & {middle?: boolean, id: string}>
 
 interface UpdateTabBarsActionType {
     type: 'updateTabBars',
@@ -19,8 +19,8 @@ interface UpdateSelectedActionType {
 
 export type ActionType = UpdateTabBarsActionType | UpdateSelectedActionType;
 
-export interface StateTyPe {
-    selectedId: number,
+export interface StateType {
+    selectedId: string,
     tabBars: TabBarsType,
     dispatch: React.Dispatch<ActionType>
 }

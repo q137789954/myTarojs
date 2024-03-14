@@ -3,7 +3,7 @@ import { Image } from "@tarojs/components";
 import "./assets/iconfont.css";
 import "./index.less";
 
-type BarPropsType = Taro.TabBarItem & {middle?: boolean, selectedId?: number, id: number};
+type BarPropsType = Taro.TabBarItem & {middle?: boolean, selectedId?: string, id: string};
 
 const Bar = (props: BarPropsType) => {
   const { iconPath, selectedIconPath, text, id, middle, pagePath, selectedId } = props;
